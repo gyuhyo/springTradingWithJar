@@ -32,6 +32,10 @@ dependencies {
     implementation group: 'com.oracle.ojdbc', name: 'ojdbc8', version: '19.3.0.0'
     // https://mvnrepository.com/artifact/org.mybatis/mybatis
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.7'
+    // https://mvnrepository.com/artifact/org.springframework/spring-websocket
+    implementation group: 'org.springframework', name: 'spring-websocket', version: '5.3.9'
+    // https://mvnrepository.com/artifact/org.springframework/spring-messaging
+    implementation group: 'org.springframework', name: 'spring-messaging', version: '5.3.9'
 }
 
 test {

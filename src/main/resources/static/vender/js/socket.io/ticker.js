@@ -7,6 +7,8 @@ let CoinJson;
 let CoinList;
 let cardSound = true;
 
+let lastLoad = {};
+
 $.ajax({
     url: "https://api.upbit.com/v1/market/all?isDetails=false",
     type: "get",
@@ -20,6 +22,7 @@ $.ajax({
 
 krwMarkets.forEach((v, k) => {
     markets.push(v.market);
+    lastLoad[v.market] = {"modifiedDate": null, "data": null};
 });
 
 let ioData =  JSON.stringify([{"ticket":"testasdasd"},{"type":"trade","codes":markets}]);
@@ -58,7 +61,15 @@ tickerSocket.onmessage = ((data) => {
 
     if (totalPrice > 20000000) {
 
-        Utils.getHtmlFromWeb(arrToJson.code);
+        let fullDays = getDates();
+        let forDay = fullDays.year + "-" + fullDays.month + "-" + fullDays.day + " " + fullDays.hour + ":" + fullDays.min;
+
+        if (lastLoad[arrToJson.code].modifiedDate != forDay) {
+            Utils.getHtmlFromWeb(arrToJson.code);
+        } else {
+            CoinList = lastLoad[arrToJson.code].data;
+        }
+
         CoinJson = JSON.parse(CoinList);
         let CoinMovings = GetMovingAvg();
 
@@ -150,20 +161,7 @@ let viewTradeTicker2 = (datas) => {
 
     $("#upbitWhale").prepend(template);
 
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    month = month >= 10 ? month : '0' + month
-    let day = date.getDate();
-    day = day >= 10 ? day : '0' + day
-    let hour = date.getHours();
-    hour = hour >= 10 ? hour : '0' + hour
-    let min = date.getMinutes();
-    min = min >= 10 ? min : '0' + min
-    let sec = date.getSeconds();
-    sec = sec >= 10 ? sec : '0' + sec
-
-    let fullDate = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+    let fullDate = getDates().fullDate;
 
     let accuratePrice = (datas.ask_bid == "ASK") ? datas.price : 0 - datas.price;
 
@@ -236,20 +234,7 @@ let viewTradeTicker2 = (datas) => {
 
 let viewTradeTicker3 = (datas) => {
 
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    month = month >= 10 ? month : '0' + month
-    let day = date.getDate();
-    day = day >= 10 ? day : '0' + day
-    let hour = date.getHours();
-    hour = hour >= 10 ? hour : '0' + hour
-    let min = date.getMinutes();
-    min = min >= 10 ? min : '0' + min
-    let sec = date.getSeconds();
-    sec = sec >= 10 ? sec : '0' + sec
-
-    let fullDate = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+    let fullDate = getDates().fullDate;
 
     let accuratePrice = (datas.ask_bid == "ASK") ? datas.price : 0 - datas.price;
 
@@ -353,6 +338,9 @@ let numberToKorean2 = (number) => {
 
 let Utils = {
     getHtmlFromWeb: (CoinCode) => {
+
+        let dates = getDates();
+
         $.ajax({
             url: "https://api.upbit.com/v1/candles/minutes/15?market=" + CoinCode +"&count=200",
             type: "get",
@@ -361,6 +349,8 @@ let Utils = {
             success: (data) => {
                 console.warn = console.error = () => {};
                 CoinList = data;
+                lastLoad[CoinCode].modifiedDate = dates.year + "-" + dates.month + "-" + dates.day + " " + dates.hour + ":" + dates.min;
+                lastLoad[CoinCode].data = data;
             }
         });
     }
@@ -471,4 +461,23 @@ function notify(msg) {
             window.open('http://localhost:8080/');
         };
     }
+}
+
+let getDates = () => {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    month = month >= 10 ? month : '0' + month
+    let day = date.getDate();
+    day = day >= 10 ? day : '0' + day
+    let hour = date.getHours();
+    hour = hour >= 10 ? hour : '0' + hour
+    let min = date.getMinutes();
+    min = min >= 10 ? min : '0' + min
+    let sec = date.getSeconds();
+    sec = sec >= 10 ? sec : '0' + sec
+
+    let fullDate = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+
+    return {"year": year, "month": month, "day": day, "hour": hour, "min": min, "sec": sec, "fullDate": fullDate};
 }

@@ -37,7 +37,7 @@ let viewTradeTicker = (datas) => {
     if ($("#" + datas.markets + "-CARD").find(".trade_price").text() != (datas.trade + " (" + datas.signed_change_rate + "%)").toString()) {
         if (datas.ask_bid == "ASK") {
             $("#" + datas.markets + "-CARD").find(".card").animate({"background-color": "#41AF39"}, 500);
-        } else {
+        } else if (datas.ask_bid == "BID") {
             $("#" + datas.markets + "-CARD").find(".card").animate({"background-color": "#EB539E"}, 500);
         }
     }
