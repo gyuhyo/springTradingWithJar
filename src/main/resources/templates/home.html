@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/homeLayout :: setContainer(~{this::container})}">
+    <th:block th:fragment="container">
+        <script src="/static/vender/js/socket.io/ticker.js?version=2021-07-22" type="text/javascript"></script>
+        <script src="/static/vender/js/socket.io/widget_decode.js?version=2021-07-21" type="text/javascript"></script>
+        <div class="row">
+            <!-- // 비트코인 // -->
+            <div class="col-lg-3 col-md-6 text-white mt-3" id="KRW-BTC-CARD">
+                <div class="shadow card" style="background-color: #5586EB;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>KRW-BTC</h5>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="col-xs-3">
+                                <img src="https://static.upbit.com/logos/BTC.png" style="width: 52px; height: 52px;">
+                            </div>
+                            <div class="col-xs-9 text-end">
+                                <h5 class="trade_price">60,512,202 (12.02%)</h5>
+                                <p class="mb-0 closing_trade">전일대비 210,500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex flex-row justify-content-between text-white">
+                        <span class="price_volume">거래대금</span>
+                        <span class="ms-auto kimp">김프</span>
+                    </div>
+                </div>
+            </div>
+            <!-- // 비트코인 // -->
+
+            <!-- // 이더리움 // -->
+            <div class="col-lg-3 col-md-6 text-white mt-3" id="KRW-ETH-CARD">
+                <div class="shadow card card-color" style="background-color: #5586EB;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>KRW-ETH</h5>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="col-xs-3">
+                                <img src="https://static.upbit.com/logos/ETH.png" style="width: 52px; height: 52px;">
+                            </div>
+                            <div class="col-xs-9 text-end">
+                                <h5 class="trade_price">60,512,202 (12.02%)</h5>
+                                <p class="mb-0 closing_trade">전일대비 210,500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex flex-row justify-content-between text-white">
+                        <span class="price_volume">거래대금</span>
+                        <span class="ms-auto kimp">김프</span>
+                    </div>
+                </div>
+            </div>
+            <!-- // 이더리움 // -->
+
+            <!-- // 리플 // -->
+            <div class="col-lg-3 col-md-6 text-white mt-3" id="KRW-XRP-CARD">
+                <div class="shadow card" style="background-color: #5586EB;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>KRW-XRP</h5>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="col-xs-3">
+                                <img src="https://static.upbit.com/logos/XRP.png" style="width: 52px; height: 52px;">
+                            </div>
+                            <div class="col-xs-9 text-end">
+                                <h5 class="trade_price">60,512,202 (12.02%)</h5>
+                                <p class="mb-0 closing_trade">전일대비 210,500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex flex-row justify-content-between text-white">
+                        <span class="price_volume">거래대금</span>
+                        <span class="ms-auto kimp">김프</span>
+                    </div>
+                </div>
+            </div>
+            <!-- // 리플 // -->
+
+            <!-- // 도지코인 // -->
+            <div class="col-lg-3 col-md-6 text-white mt-3" id="KRW-DOGE-CARD">
+                <div class="shadow card" style="background-color: #5586EB;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>KRW-DOGE</h5>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="col-xs-3">
+                                <img src="https://static.upbit.com/logos/DOGE.png" style="width: 52px; height: 52px;">
+                            </div>
+                            <div class="col-xs-9 text-end">
+                                <h5 class="trade_price">60,512,202 (12.02%)</h5>
+                                <p class="mb-0 closing_trade">전일대비 210,500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex flex-row justify-content-between text-white">
+                        <span class="price_volume">거래대금</span>
+                        <span class="ms-auto kimp">김프</span>
+                    </div>
+                </div>
+            </div>
+            <!-- // 도지코인 // -->
+        </div>
+        <div class="row" style="font-size: 0.9em;">
+            <div class="col-lg-6 col-md-6 mt-3">
+                <div class="d-flex text-white">
+                    <div class="me-auto p2">
+                        <h5 class="d-flex text-white align-bottom">
+                            <img src="https://www.pngkey.com/png/full/236-2365107_signal-icon-png.png" style="width: 0.9em; height: 0.9em;" />
+                            <p class="m-0" style="margin-left: 7px !important; font-size: 0.7em;">매수/매도 시그널</p>
+                        </h5>
+                    </div>
+                    <div class="p2" style="width: 20em">
+                        <div class="d-flex progress">
+                            <div class="me-auto progress-bar progress-bar-striped progress-bar-animated bg-success askProgress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                매수 시그널
+                            </div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bidProgress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                매도 시그널
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3 shadow-lg g-2 rounded" style="margin-top: 0px; background-color: #1b1d21; height: 614px; overflow-y: overlay;" id="askBidSignal">
+
+
+
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        setInterval(() => {
+                            $(document).find(".timeouts").each((key, data) => {
+                                let eDate = new Date().getTime();
+                                let sDate = new Date($(data).attr("data-start-time")).getTime();
+
+                                let useTime = eDate - sDate;
+
+                                var timeGap = new Date(0, 0, 0, 0, 0, 0, useTime);
+
+                                let useMin = timeGap.getMinutes();
+                                let useSec = timeGap.getSeconds();
+
+                                let fullSec = (useMin * 60) + useSec;
+                                let gage = 100 - (100/900) * fullSec;
+
+                                $(data).attr("aria-valuenow", gage);
+                                $(data).css("width", gage + "%");
+                                if (parseFloat($(data).attr("aria-valuenow")) <= 30) {
+                                    $(data).animate({"color":"black"});
+                                }
+
+                                $(data).text((14-useMin) + "분 " + (60-useSec) + "초 남음");
+
+                                if (parseFloat($(data).attr("aria-valuenow")) <= 0) {
+                                    $(data).closest(".card-container").fadeOut().remove();
+                                }
+                            });
+                        }, 1000);
+                    });
+                </script>
+            </div>
+            <div class="col-lg-6 col-md-6 mt-3 pt-0 pb-0">
+                <div class="d-flex text-white">
+                    <div class="me-auto p2">
+                        <h5 class="d-flex text-white align-bottom">
+                            <img src="https://image.flaticon.com/icons/png/512/2834/2834539.png" style="width: 0.9em; height: 0.9em;" />
+                            <p class="m-0" style="margin-left: 7px !important; font-size: 0.7em;">업비트 고래 현황</p>
+                            <img src="https://purepng.com/public/uploads/large/purepng.com-settings-icon-android-kitkatsymbolsiconsapp-iconsandroid-kitkatandroid-44-721522597677p9lc8.png"
+                                 style="margin-left: 7px; width: 0.9em; height: 0.9em;"
+                                 data-bs-placement="bottom" title="설정"
+                                 data-bs-toggle="modal" data-bs-target="#settingModal"/>
+                        </h5>
+                    </div>
+                    <div class="p2">
+                        <p class="m-0" style="font-size: 0.8em;" id="upbitWhaleUpdatedTime">lastUpdated: 0000-00-00 00:00:00</p>
+                    </div>
+                </div>
+                <ul class="list-group shadow">
+                    <li class="list-group-item list-group-item-secondary border-bottom-0 bg-dark text-white"
+                        style="box-sizing: border-box;
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;">
+                        <div class="d-flex">
+                            <div class="me-auto bd-highlight" style="width: 10em;">코인</div>
+                            <div class="me-auto bd-highlight" style="width: 2em;">구분</div>
+                            <div class="bd-highlight" style="width:5em;">체결가</div>
+                            <div class="bd-highlight text-center" style="margin-left: 20px; width:3em;">가격</div>
+                            <div class="bd-highlight text-center" style="margin-left: 20px; width:2em;">RSI</div>
+                            <div class="bd-highlight" style="margin-left: 20px; width:5em;">BB上</div>
+                            <div class="bd-highlight" style="margin-left: 20px; width:5em;">BB下</div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group" style="background-color: #1b1d21; height: 40em; overflow-y: overlay;" id="upbitWhale">
+                </ul>
+            </div>
+        </div>
+        <!-- 셋팅 모달 -->
+        <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">알림 셋팅</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input whaleSoundChk" type="checkbox" id="flexSwitchCheckChecked" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">고래 출현시 알림 소리 켜기</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary setModalBtn">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 셋팅 모달 -->
+    </th:block>
+</th:block>
