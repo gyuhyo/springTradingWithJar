@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="~{/layout/homeLayout :: setContainer(~{this::container})}">
+<th:block th:replace="~{layout/homeLayout :: setContainer(~{this::container})}">
     <th:block th:fragment="container">
-        <script src="/static/vender/js/socket.io/ticker.js?version=2021-07-22" type="text/javascript"></script>
-        <script src="/static/vender/js/socket.io/widget_decode.js?version=2021-07-21" type="text/javascript"></script>
+        <script src="static/vender/js/socket.io/ticker.js?version=2021-07-22" type="text/javascript"></script>
+        <script src="static/vender/js/socket.io/widget_decode.js?version=2021-07-21" type="text/javascript"></script>
         <div class="row">
             <!-- // 비트코인 // -->
             <div class="col-lg-3 col-md-6 text-white mt-3" id="KRW-BTC-CARD">
