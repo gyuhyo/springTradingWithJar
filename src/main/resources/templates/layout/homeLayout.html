@@ -7,18 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link href="static/vender/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//localhost:8081/static/vender/css/bootstrap.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Custom styles for this template -->
-  <link href="static/vender/css/simple-sidebar.css" rel="stylesheet">
-  <link href="static/vender/css/chat.css" rel="stylesheet">
+  <link href="//localhost:8081/static/vender/css/simple-sidebar.css" rel="stylesheet">
+  <link href="//localhost:8081/static/vender/css/chat.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/24c1a5db21.js" crossorigin="anonymous"></script>
+  <script src="//localhost:8081/static/vender/js/member/login.js" crossorigin="anonymous"></script>
+
+  <th:block th:if="${user!=null}">
+    <script th:inline="javascript">
+        let userEmail = [[${user.email}]];
+        let userName = [[${user.name}]];
+        let userNick = [[${user.nick}]];
+    </script>
+  </th:block>
+
   <style>
 
     * {
@@ -45,7 +55,8 @@
     /*}*/
 
     #upbitWhale::-webkit-scrollbar,
-    #askBidSignal::-webkit-scrollbar
+    #askBidSignal::-webkit-scrollbar,
+    .customScroll::-webkit-scrollbar
     {
       position: absolute;
       right: 5px;
@@ -54,7 +65,8 @@
     }
 
     #upbitWhale::-webkit-scrollbar-thumb,
-    #askBidSignal::-webkit-scrollbar-thumb
+    #askBidSignal::-webkit-scrollbar-thumb,
+    .customScroll::-webkit-scrollbar-thumb
     {
       background-color: #1b1d21;
       background-image: -webkit-linear-gradient(45deg,
@@ -129,7 +141,8 @@
             <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Link</a>
+            <a th:if="${user==null}" th:text="Login" class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"></a>
+            <a th:unless="${user==null}" th:text="Logout" class="nav-link text-white" href="#"></a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,54 +161,39 @@
     <div class="container-lg align-middle content">
       <th:block th:replace = "${container}">
       </th:block>
-      <footer>
-
-        <div id="username-page">
-          <div class="username-page-container">
-            <h1 class="title">Digite seu nome</h1>
-            <form id="usernameForm" name="usernameForm">
-              <div class="form-group">
-                <input type="text" id="name" placeholder="Nome"
-                       autocomplete="off" class="form-control" />
-              </div>
-              <div class="form-group">
-                <button type="submit" class="accent username-submit">Comece a conversar</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div id="chat-page" class="hidden">
-          <div class="chat-container">
-            <div class="chat-header">
-              <h2>ChatBox Tupi</h2>
-            </div>
-            <div class="connecting">Conectando ao chat...</div>
-            <ul id="messageArea">
-
-            </ul>
-            <form id="messageForm" name="messageForm" nameForm="messageForm">
-              <div class="form-group">
-                <div class="input-group clearfix">
-                  <input type="text" id="message" placeholder="Digite uma mensagem..."
-                         autocomplete="off" class="form-control" />
-                  <button type="submit" class="primary">Enviar</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-        <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-        <script src="static/vender/js/main.js"></script>
-
-      </footer>
+      <footer></footer>
     </div>
   </div>
 </div>
+
+<!-- 로그인 모달 -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">로그인</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control lEmail" name="email" id="floatingInput" placeholder="name@example.com" required>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control lPass" name="password" id="floatingPassword" placeholder="Password" required>
+            <label for="floatingPassword">Password</label>
+          </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary loginBtn">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 로그인 모달 -->
 
 <!-- Menu Toggle Script -->
 <script>

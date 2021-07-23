@@ -195,8 +195,61 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="list-group" style="background-color: #1b1d21; height: 40em; overflow-y: overlay;" id="upbitWhale">
+                <ul class="list-group" style="background-color: #1b1d21; height: 17.6em; overflow-y: overlay;" id="upbitWhale">
                 </ul>
+
+                <div class="d-flex text-white mt-3">
+                    <div class="me-auto p2">
+                        <h5 class="d-flex text-white align-bottom">
+                            <img src="https://image.flaticon.com/icons/png/512/2834/2834539.png" style="width: 0.9em; height: 0.9em;" />
+                            <p class="m-0" style="margin-left: 7px !important; font-size: 0.7em;">Chating</p>
+                        </h5>
+                    </div>
+                </div>
+
+                <div id="username-page">
+                    <div class="username-page-container">
+                        <th:block th:if="${user==null}">
+                            <h1 class="title">로그인 후 이용가능합니다.</h1>
+                        </th:block>
+                        <th:block th:unless="${user==null}">
+                            <h1 class="title">채팅방 입장</h1>
+                            <form id="usernameForm" name="usernameForm">
+                                <div class="form-group">
+                                    <input type="text" id="name" placeholder="Name"
+                                           autocomplete="off" class="form-control" th:value="${user.nick}"readonly/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="accent username-submit">입장</button>
+                                </div>
+                            </form>
+                        </th:block>
+                    </div>
+                </div>
+
+                <div id="chat-page" class="hidden">
+                    <div class="chat-container">
+                        <div class="connecting">Connect to chat...</div>
+                        <ul id="messageArea">
+
+                        </ul>
+                        <form id="messageForm" name="messageForm" nameForm="messageForm">
+                            <div class="form-group">
+                                <div class="input-group clearfix">
+                                    <input type="text" id="message" placeholder="메시지를 입력해주세요..."
+                                           autocomplete="off" class="form-control" />
+                                    <button type="submit" class="primary">Enter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+                <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+                <script src="static/vender/js/main.js"></script>
             </div>
         </div>
         <!-- 셋팅 모달 -->

@@ -16,21 +16,12 @@
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 input {
     padding-left: 10px;
     outline: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 1.7em;
 }
 
 a {
@@ -74,24 +65,22 @@ button.accent {
     text-align: center;
 }
 
+#messageArea {
+    height: 100%;
+}
+
 .username-page-container {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
     width: 100%;
-    max-width: 500px;
     display: inline-block;
-    margin-top: 42px;
     vertical-align: middle;
     position: relative;
     padding: 35px 55px 35px;
     min-height: 250px;
-    position: absolute;
-    top: 50%;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    margin-top: -160px;
 }
 
 .username-page-container .username-submit {
@@ -101,7 +90,7 @@ button.accent {
 
 #chat-page {
     position: relative;
-    height: 100%;
+    height: 20em;
 }
 
 .chat-container {
@@ -110,7 +99,6 @@ button.accent {
     margin-right: auto;
     background-color: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    margin-top: 30px;
     height: calc(100% - 60px);
     max-height: 600px;
     position: relative;
@@ -123,11 +111,10 @@ button.accent {
     overflow: auto;
     overflow-y: scroll;
     padding: 0 20px 0px 20px;
-    height: calc(100% - 150px);
 }
 
 #chat-page #messageForm {
-    padding: 20px;
+    padding: 10px 0px;
 }
 
 #chat-page ul li {
