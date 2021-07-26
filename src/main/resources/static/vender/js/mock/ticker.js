@@ -22,7 +22,7 @@ $(() => {
             "trade": numberWithComma(arrToJson.trade_price), // 현재가
             "signed_change_price": numberWithComma(parseFloat(arrToJson.signed_change_price).toFixed(2)), // 전일대비
             "change_price": arrToJson.change_price, // 부호없는 전일 대비
-            "signed_change_rate": (arrToJson.signed_change_rate).toFixed(2), // 등락률
+            "signed_change_rate": (arrToJson.signed_change_rate*100).toFixed(2), // 등락률
             "acc_trade_price": numberWithComma((arrToJson.acc_trade_price / 1000000).toFixed(0)), // 거래량
             "ask_bid": arrToJson.ask_bid
         }
@@ -33,11 +33,11 @@ $(() => {
         $("#" + arrToJson.code).find(".prev_price").html(datas.signed_change_rate + "%<br>" + scp);
         $("#" + arrToJson.code).find(".trade_vol").text(datas.acc_trade_price + "백만");
 
-        if (scp > 0) {
+        if (Number(datas.signed_change_rate) > 0) {
             $("#" + arrToJson.code).find(".trade_price").animate({"color": "#eca7bb"}, 500);
             $("#" + arrToJson.code).find(".prev_price").animate({"color": "#eca7bb"}, 500);
             $("#" + arrToJson.code).find(".trade_vol").animate({"color": "#eca7bb"}, 500);
-        } else if (scp == 0) {
+        } else if (Number(datas.signed_change_rate) == 0) {
             $("#" + arrToJson.code).find(".trade_price").animate({"color": "#fff"}, 500);
             $("#" + arrToJson.code).find(".prev_price").animate({"color": "#fff"}, 500);
             $("#" + arrToJson.code).find(".trade_vol").animate({"color": "#fff"}, 500);
