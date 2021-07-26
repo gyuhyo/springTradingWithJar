@@ -458,7 +458,7 @@ function notify(msg) {
         });
 
         notification.onclick = function () {
-            window.open('http://localhost:8080/');
+            window.open('http://${local_ip}/');
         };
     }
 }
